@@ -157,11 +157,12 @@ func (g *TrafficGenerator) CraftTx(ctx context.Context, from, to KeyPair) (*type
 		return nil, err
 	}
 
-	value := big.NewInt(1000000000000000) // in wei (1 eth)
-	gasLimit := uint64(21000)             // in units
-	gasPrice := big.NewInt(30000000000)   // in wei (30 gwei)
+	value := big.NewInt(1000)           // in wei (1 eth)
+	gasLimit := uint64(30000000)        // in units
+	gasPrice := big.NewInt(30000000000) // in wei (30 gwei)
 	toAddress := to.Address
 
+	g.Config.PadSize = 131072
 	data := make([]byte, g.Config.PadSize)
 	_, err = rand.Read(data)
 	if err != nil {
